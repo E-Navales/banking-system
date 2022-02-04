@@ -1,0 +1,133 @@
+<div *ngIf="!forPartnerApplication">
+  <mat-card>
+    <div class="form-container">
+      <mat-card-content>
+        <h3><b>Please enter your company details</b></h3>
+        <form [formGroup]="companyForm">
+          <div class="row">
+            <mat-form-field class="form-width-30">
+              <mat-label>Business name</mat-label>
+              <input matInput formControlName="businessName">
+              <mat-error *ngIf="companyForm.get('businessName').hasError('required')">
+                Name is <b>required</b>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field class="form-width-30">
+              <mat-label>Registration number</mat-label>
+              <input matInput formControlName="registrationNo">
+              <mat-error *ngIf="companyForm.get('registrationNo').hasError('required')">
+                Name is <b>required</b>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field class="form-width-30">
+              <mat-label>Business email address</mat-label>
+              <input matInput formControlName="businessEmail">
+              <mat-error *ngIf="companyForm.get('businessEmail').hasError('businessEmail') && !clientForm.get('email').hasError('required')">
+                Please enter a valid email address
+              </mat-error>
+              <mat-error *ngIf="companyForm.get('businessEmail').hasError('required')">
+                Email is <b>required</b>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field class="form-width-30">
+              <mat-label>Constitution</mat-label>
+              <mat-select formControlName="constitution">
+                <mat-option value="option">Sole Proprietor</mat-option>
+                <mat-option value="option">Partnership</mat-option>
+                <mat-option value="option">Shd Bhd</mat-option>
+              </mat-select>
+              <mat-error *ngIf="companyForm.get('constitution').hasError('required')">
+                Constitution is <b>required</b>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field class="form-width-50">
+              <mat-label>Business address</mat-label>
+              <textarea matInput placeholder="Ex. 123 Test St." formControlName="businessAddress"></textarea>
+              <mat-error *ngIf="companyForm.get('constitution').hasError('required')">
+                Constitution is <b>required</b>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <mat-form-field>
+            <mat-label>Postal Code</mat-label>
+            <input matInput type="number" maxlength="5" placeholder="Ex. 94105" formControlName="businessPostalCode">
+            <mat-error *ngIf="companyForm.get('businessPostalCode').hasError('required')">
+              Postal Code is <b>required</b>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>State</mat-label>
+            <mat-select formControlName="businessState">
+              <mat-option value="option">Selangor</mat-option>
+            </mat-select>
+            <mat-error *ngIf="companyForm.get('businessState').hasError('required')">
+              State is <b>required</b>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Country</mat-label>
+            <mat-select formControlName="businessCountry">
+              <mat-option value="option">Malaysia</mat-option>
+            </mat-select>
+            <mat-error *ngIf="companyForm.get('businessCountry').hasError('required')">
+              Country is <b>required</b>
+            </mat-error>
+          </mat-form-field>
+          <div class="row">
+            <mat-form-field class="form-width-30">
+              <mat-label>Current business premise(s) is/are:</mat-label>
+              <mat-select formControlName="businessPremise">
+                <mat-option value="option">Own propoerty</mat-option>
+                <mat-option value="option">Owned by related party</mat-option>
+                <mat-option value="option">Rented</mat-option>
+              </mat-select>
+              <mat-error *ngIf="companyForm.get('businessPremise').hasError('required')">
+                Business premise is <b>required</b>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-checkbox (change)="toggle()"><b>Mailing address same as business address</b></mat-checkbox>
+          </div>
+          <ng-container *ngIf="!showMailingAddress">
+            <div class="row">
+              <mat-form-field class="form-width-50">
+                <mat-label>Mailing address</mat-label>
+                <textarea matInput placeholder="Ex. 123 Test St."></textarea>
+              </mat-form-field>
+            </div>
+            <mat-form-field>
+              <mat-label>Postal Code</mat-label>
+              <input matInput type="number" maxlength="5" placeholder="Ex. 94105">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>State</mat-label>
+              <mat-select>
+                <mat-option value="option">Selangor</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Country</mat-label>
+              <mat-select>
+                <mat-option value="option">Malaysia</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </ng-container>
+        </form>
+      </mat-card-content>
+    </div>
+  </mat-card>
+  <div class="form-btn-wrapper">
+    <button routerLink="/otp-authentication" routerLinkActive="active" mat-raised-button color="primary" class="bck-btn"><mat-icon>arrow_back</mat-icon></button>
+    <button mat-raised-button color="primary" routerLink="/partner-details" class="nxt-btn" [disabled]="!companyForm.valid">Next</button>
+  </div>
+</div>
+<app-partner-details *ngIf="forPartnerApplication"></app-partner-details>

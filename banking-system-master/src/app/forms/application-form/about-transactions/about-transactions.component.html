@@ -1,0 +1,156 @@
+<div *ngIf="!forBusinessBankingServices">
+  <mat-card>
+    <div>
+      <mat-card-title>About your transactions</mat-card-title>
+    </div>
+    <div class="form-container">
+      <mat-card-content>
+        <form [formGroup]="aboutTransactionsForm">
+          <div class="row">
+            <mat-form-field class="form-width-50">
+              <mat-label>The account will be mainly used for</mat-label>
+              <mat-select placeholder="Purpose" (selectionChange)="checkIfOthers($event.value)" formControlName="purpose">
+                <mat-option value="Business Operations">Business Operations</mat-option>
+                <mat-option value="Investment">Investment</mat-option>
+                <mat-option value="Loan Repayment">Loan Repayment</mat-option>
+                <mat-option value="Others">Others</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div *ngIf="hideOthers" class="row">
+            <mat-form-field class="contact-form-width">
+              <mat-label>Please specify</mat-label>
+              <input matInput>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <p><mat-label>Where does the initial funding for this account come from?</mat-label></p>
+            <p><mat-checkbox>Business Revenue</mat-checkbox></p>
+            <p><mat-checkbox>Income from employment</mat-checkbox></p>
+            <p><mat-checkbox>Proceeds from investment</mat-checkbox></p>
+            <p><mat-checkbox>Others</mat-checkbox></p>
+          </div>
+          <div class="row">
+            <mat-form-field class="form-width-30">
+              <mat-label>Majority of your sales originate from:</mat-label>
+              <mat-select formControlName="salesOrigin">
+                <mat-option value="option">Malaysia</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field class="form-width-50">
+              <mat-label>What is your total number of expected transactions per month?</mat-label>
+              <mat-select formControlName="totalExpectedTransaction">
+                <mat-option value="option">200-499</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field class="form-width-50">
+              <mat-label>What is the expected total transaction amount per month?</mat-label>
+              <mat-select formControlName="expectedTransactionAmount">
+                <mat-option value="option">More than RM 10M</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <p><mat-label>Please provide the names of 5 current and expected Suppliers and Thier Locations.</mat-label></p>
+            <p><mat-hint align="start">(1 name per field up to 5 names)</mat-hint></p>
+            <p>
+              <mat-checkbox (change)="checkSuppliers()">I do not have the names yet</mat-checkbox>
+              <a (click)="addSupplier()"><mat-icon>add_circle_outline</mat-icon>Add Supplier</a>
+              <a (click)="removeSupplier()"><mat-icon>remove_circle_outline</mat-icon>Remove Supplier</a>
+            </p>
+            <div *ngIf="!disableSuppliers">
+              <div *ngFor="let supplier of suppliers(supplierCount)">
+                <mat-form-field>
+                  <mat-label>Name</mat-label>
+                  <input matInput [disabled]="disableSuppliers" formControlName="currentSupplierName">
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>Select Countries</mat-label>
+                  <mat-select [disabled]="disableSuppliers" (selectionChange)="checkCountry($event.value)" formControlName="currentSupplierCountry">
+                    <mat-option value="Malaysia">Malaysia</mat-option>
+                    <mat-option value="Russia">Russia</mat-option>
+                    <mat-option value="Ukraine">Ukraine</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div>
+            <p><mat-label>Please provide the names of 5 current and expected Customers and Thier Locations.</mat-label></p>
+            <p><mat-hint align="start">(1 name per field up to 5 names)</mat-hint></p>
+            <p>
+              <mat-checkbox (change)="checkCustomers()">I do not have the names yet</mat-checkbox>
+              <a (click)="addCustomer()"><mat-icon>add_circle_outline</mat-icon>Add Customer</a>
+              <a (click)="removeCustomer()"><mat-icon>remove_circle_outline</mat-icon>Remove Customer</a>
+            </p>
+            <div *ngIf="!disableCustomers">
+              <div *ngFor="let customer of customers(customerCount)">
+                <mat-form-field>
+                  <mat-label>Name</mat-label>
+                  <input matInput [disabled]="disableCustomers" formControlName="expectedCustomerName">
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>Select Countries</mat-label>
+                  <mat-select [disabled]="disableCustomers" (selectionChange)="checkCountry($event.value)" formControlName="expectedCustomerCountry">
+                    <mat-option value="Malaysia">Malaysia</mat-option>
+                    <mat-option value="Russia">Russia</mat-option>
+                    <mat-option value="Ukraine">Ukraine</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="hideCrimes" class="row">
+            <p>
+              <mat-label>
+                <b>Do you deal with Crimes?</b>
+              </mat-label>
+            </p>
+            <p>
+              <mat-radio-group aria-label="Select an option">
+                <mat-radio-button value="1">Yes</mat-radio-button>
+                <mat-radio-button value="2">No</mat-radio-button>
+              </mat-radio-group>
+            </p>
+          </div>
+          <div class="row">
+            <p>
+              <mat-label>
+                <b>Where do you pay taxes?</b>
+              </mat-label>
+            </p>
+            <span>
+              <mat-checkbox class="chckbox">Malaysia</mat-checkbox>
+              <mat-checkbox class="chckbox">USA</mat-checkbox>
+              <mat-checkbox class="chckbox">Others</mat-checkbox>
+            </span>
+          </div>
+          <div class="row" style="margin-top: 1rem">
+            <p>
+              <mat-label>
+                <b>Would your business generate most of its income from operations such as sales, trading, F&B, services, etc? (i.e Not passive income such as dividends, interest, rent, or royalties etc?)</b>
+              </mat-label>
+            </p>
+            <p>
+              <mat-radio-group aria-label="Select an option" formControlName="servicesIncome">
+                <mat-radio-button value="1">Yes</mat-radio-button>
+                <mat-radio-button value="2">No</mat-radio-button>
+              </mat-radio-group>
+            </p>
+          </div>
+        </form>
+      </mat-card-content>
+    </div>
+  </mat-card>
+  <div class="form-btn-wrapper">
+    <span>
+      <button routerLink="/about-business" routerLinkActive="active" mat-raised-button color="primary" class="bck-btn">Back</button>
+      <button mat-raised-button color="primary" routerLink="/business-banking-services" class="nxt-btn" [disabled]="!aboutTransactionsForm.valid">Next</button>
+    </span>
+  </div>
+</div>
+<app-business-banking-services *ngIf="forBusinessBankingServices"></app-business-banking-services>

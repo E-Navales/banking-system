@@ -1,0 +1,44 @@
+<div>
+  <mat-card>
+    <div>
+      <mat-card-content>
+        <h3><b>Please upload your signature for our records</b></h3>
+        <div class="row">
+          <mat-label>Upload your signature (Image or PDF, max 5MB). For the best results, please sign with a black or dark blue pen on a white piece of paper.</mat-label>
+          Insert image here
+        </div>
+        <div class="row">
+          <p><b>INDIVIDUAL NAME 1</b></p>
+          <div class="pic-border">
+            <img src="../../../assets/img/sample-str.png" alt="front pic" class="signtr">
+          </div>
+          <p><mat-label>Upload NRIC (Front)</mat-label></p>
+          <p><mat-hint><b>(Image, max 5MB)</b></mat-hint></p>
+          <mat-form-field>
+            <mat-label *ngIf="selectedFiles; else checkFile">{{selectedFiles.item(0).name}}</mat-label>
+            <ng-template #checkFile>
+                <mat-label *ngIf="isGt5mb; else newFile">The file size is too large</mat-label>
+            </ng-template>
+            <ng-template #newFile>
+                <mat-label>Choose file</mat-label>
+            </ng-template>
+            <input matInput disabled>
+            <button mat-icon-button matSuffix (click)="fileInput.click()">
+                <mat-icon>attach_file</mat-icon>
+            </button>
+            <input hidden (change)="selectFile($event)" #fileInput type="file" id="file" accept=".jpg,.jpeg">
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <button mat-stroked-button>Upload</button>
+        </div>
+      </mat-card-content>
+    </div>
+  </mat-card>
+  <div class="form-btn-wrapper">
+    <span>
+      <button routerLink="/upload-nric" routerLinkActive="active" mat-raised-button color="primary" class="bck-btn">Back</button>
+      <button mat-raised-button color="primary" class="nxt-btn">Next</button>
+    </span>
+  </div>
+</div>

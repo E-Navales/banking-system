@@ -1,0 +1,26 @@
+<div *ngIf="!forCompanyApplication">
+  <mat-card>
+    <div>
+      <mat-card-title>OTP Authentication</mat-card-title>
+    </div>
+    <div>
+      <mat-card-content>
+        <form [formGroup]="otpForm">
+        <p>Please enter the code that has been sent to the mobile number you gave us: </p>
+          <div class="row">
+            <mat-form-field appearance="fill">
+              <mat-label>Code</mat-label>
+              <input matInput formControlName="code">
+            </mat-form-field>
+          </div>
+          <a href="">Resend Code</a>
+        </form>
+      </mat-card-content>
+    </div>
+  </mat-card>
+  <div class="form-btn-wrapper">
+    <button routerLink="/client-info" routerLinkActive="active" mat-raised-button color="primary" class="bck-btn"><mat-icon>arrow_back</mat-icon></button>
+    <button mat-raised-button color="primary" routerLink="/company-details" class="nxt-btn" [disabled]="!otpForm.valid">Next</button>
+  </div>
+</div>
+<app-company-details *ngIf="forCompanyApplication"></app-company-details>

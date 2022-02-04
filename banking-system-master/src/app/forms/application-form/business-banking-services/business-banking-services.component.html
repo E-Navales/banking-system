@@ -1,0 +1,35 @@
+<div *ngIf="!forUploadingDocument">
+  <mat-card>
+    <div>
+      <mat-card-title>Business Banking services</mat-card-title>
+    </div>
+    <div>
+      <mat-card-content>
+        <h3><b>OCBC is pleased to offer you the following standard products suitable for a business of your nature:</b></h3>
+        <div class="row">
+          <mat-list>
+            <mat-list-item><mat-icon>check</mat-icon><b>Basic Current Account</b></mat-list-item>
+            <mat-list-item><mat-icon>check</mat-icon><b>Internet Banking (Velocity)*</b></mat-list-item>
+          </mat-list>
+        </div>
+        <div class="row">
+          <mat-checkbox><b>DuitNow**</b></mat-checkbox>
+        </div>
+        <div class="row">
+          <p><i>* 1 person to create and approve transaction</i></p>
+          <p><i>(Applicable to sole-proprietor & single-director company)</i></p>
+          <p><i>2 person to create and approve transaction</i></p>
+          <p><i>(Applicable to partnership & 2-directors company)</i></p>
+        </div>
+        <p><mark>** By selecting DuitNow you are authorizing the bank to register or switch your Business Registration Number as your DuitNow ID.</mark></p>
+      </mat-card-content>
+    </div>
+  </mat-card>
+  <div class="form-btn-wrapper">
+    <span>
+      <button routerLink="/about-transactions" routerLinkActive="active" mat-raised-button color="primary" class="bck-btn">Back</button>
+      <button mat-raised-button color="primary" routerLink="/upload-document" class="nxt-btn">Next</button>
+    </span>
+  </div>
+</div>
+<app-upload-document *ngIf="forUploadingDocument"></app-upload-document>

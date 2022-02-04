@@ -1,0 +1,27 @@
+<div *ngIf="!forAppointment && !forApplication">
+  <mat-card>
+    <div>
+      <mat-card-content>
+        <h3><b>Thank you for starting your business journey with us!</b></h3>
+        <p>You are applying for <b>an eBiz Current Account</b></p>
+        <mat-list class="time1">
+          <mat-list-item class="time2">
+            <mat-icon>access_time</mat-icon>This application should take less than 15 minutes
+          </mat-list-item>
+        </mat-list>
+        <p>Before you login, please ensure that all your owners, directors or partners meet the following criteria:</p>
+        <mat-list>
+          <mat-list-item><mat-icon>check</mat-icon>All directors/shareholders/sole proprietor/partners are citizen of Malaysia or PR</mat-list-item>
+          <mat-list-item><mat-icon>check</mat-icon>Entity Registered with SSM</mat-list-item>
+          <mat-list-item><mat-icon>check</mat-icon>Sole-proprietor; up to 2 Partners/Directors</mat-list-item>
+          <mat-list-item><mat-icon>check</mat-icon>SSM Report is updated with the latest list of owners, partners, directors/shareholders</mat-list-item>
+        </mat-list>
+        <p>If you are unable to meet any of the criteria above, make an <a routerLink="/appointment" routerLinkActive="active" (click)="goToAppointment()">appointment</a></p>
+      </mat-card-content>
+    </div>
+  </mat-card>
+  <div class="button-wrapper">
+    <button mat-raised-button color="primary" routerLink="/client-info">Start</button>
+  </div>
+</div>
+<app-contact-details *ngIf="forAppointment"></app-contact-details>

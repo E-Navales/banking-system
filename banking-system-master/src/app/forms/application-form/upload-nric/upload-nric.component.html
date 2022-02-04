@@ -1,0 +1,78 @@
+<div *ngIf="!forUploadingSignature">
+  <mat-card>
+    <div>
+      <mat-card-content>
+        <h3><b>Please upload your NRIC for our records</b></h3>
+        <div class="row">
+          <mat-label>
+            <b>Your NRIC image must be clear, and the maximum file capacity is 5MB (both front and back is required)</b>
+          </mat-label>
+          Insert image here
+        </div>
+        <div class="row">
+          <p><b>INDIVIDUAL NAME 1</b></p>
+          <p>(Image or PDF, max 5MB)</p>
+          <mat-grid-list cols="2" rowHeight="30rem">
+            <mat-grid-tile>
+              <div class="row">
+                <div class="pic-border">
+                  <img src="../../../assets/img/front-photo.jpg" alt="front pic" class="front-pic">
+                </div>
+                <p><mat-label>Upload NRIC (Front)</mat-label></p>
+                <p><mat-hint><b>(Image, max 5MB)</b></mat-hint></p>
+                <mat-form-field>
+                  <mat-label *ngIf="selectedFilesFront; else checkFileFront">{{selectedFilesFront.item(0).name}}</mat-label>
+                  <ng-template #checkFileFront>
+                      <mat-label *ngIf="isFrontGt5mb; else newFileFront">The file size is too large</mat-label>
+                  </ng-template>
+                  <ng-template #newFileFront>
+                      <mat-label>Choose file</mat-label>
+                  </ng-template>
+                  <input matInput disabled>
+                  <button mat-icon-button matSuffix (click)="fileInputFront.click()">
+                      <mat-icon>attach_file</mat-icon>
+                  </button>
+                  <input hidden (change)="selectFileFront($event)" #fileInputFront type="file" id="fileFront" accept=".jpg,.jpeg">
+                  <button mat-stroked-button>Upload</button>
+                </mat-form-field>
+              </div>
+            </mat-grid-tile>
+            <mat-grid-tile>
+              <div>
+                <div class="pic-border">
+                  <img src="../../../assets/img/back-photo.jpg" alt="back pic" class="back-pic">
+                </div>
+                <p><mat-label>Upload NRIC (Back)</mat-label></p>
+                <p><mat-hint><b>(Image, max 5MB)</b></mat-hint></p>
+                <mat-hint></mat-hint>
+                <mat-form-field>
+                  <mat-label *ngIf="selectedFilesBack; else checkFileBack">{{selectedFilesBack.item(0).name}}</mat-label>
+                  <ng-template #checkFileBack>
+                      <mat-label *ngIf="isBackGt5mb; else newFileBack">The file size is too large</mat-label>
+                  </ng-template>
+                  <ng-template #newFileBack>
+                      <mat-label>Choose file</mat-label>
+                  </ng-template>
+                  <input matInput disabled>
+                  <button mat-icon-button matSuffix (click)="fileInputBack.click()">
+                      <mat-icon>attach_file</mat-icon>
+                  </button>
+                  <input hidden (change)="selectFileBack($event)" #fileInputBack type="file" id="fileBack" accept=".jpg,.jpeg">
+                  <button mat-stroked-button>Upload</button>
+                </mat-form-field>
+              </div>
+            </mat-grid-tile>
+          </mat-grid-list>
+
+        </div>
+      </mat-card-content>
+    </div>
+  </mat-card>
+  <div class="form-btn-wrapper">
+    <span>
+      <button routerLink="/upload-document" routerLinkActive="active" mat-raised-button color="primary" class="bck-btn">Back</button>
+      <button mat-raised-button color="primary" routerLink="/upload-signature" class="nxt-btn">Next</button>
+    </span>
+  </div>
+</div>
+<app-upload-signature *ngIf="forUploadingSignature"></app-upload-signature>

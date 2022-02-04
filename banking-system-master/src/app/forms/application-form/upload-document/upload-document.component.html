@@ -1,0 +1,49 @@
+<div *ngIf="!forUploadingNRIC">
+  <mat-card>
+    <div>
+      <mat-card-content>
+        <div class="row">
+          <mat-label>
+            <b>Please upload <u>ONE</u> of the latest documents below with company name and address:</b>
+          </mat-label>
+          <ul>
+            <li>Armament or weapons related industries</li>
+            <li>Casinos, junkets, betting  or other gambling related businesses</li>
+            <li>Money services businesses</li>
+            <li>Virtual currencies</li>
+            <li>Forex trader, multi-level marketing/pyramid scheme, investment advisor/business</li>
+          </ul>
+          <p>Your document image must be clear and the maximum file capacity is 5MB.</p>
+        </div>
+        <div class="row">
+          <p><b>Upload document image</b></p>
+          <p>(Image or PDF, max 5MB)</p>
+          <mat-form-field>
+            <mat-label *ngIf="selectedFiles; else checkFile">{{selectedFiles.item(0).name}}</mat-label>
+            <ng-template #checkFile>
+                <mat-label *ngIf="isGt5mb; else newFile">The file size is too large</mat-label>
+            </ng-template>
+            <ng-template #newFile>
+                <mat-label>Choose file</mat-label>
+            </ng-template>
+            <input matInput disabled>
+            <button mat-icon-button matSuffix (click)="fileInput.click()">
+                <mat-icon>attach_file</mat-icon>
+            </button>
+            <input hidden (change)="selectFile($event)" #fileInput type="file" id="file" accept=".jpg,.jpeg">
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <button mat-stroked-button>Upload</button>
+        </div>
+      </mat-card-content>
+    </div>
+  </mat-card>
+  <div class="form-btn-wrapper">
+    <span>
+      <button routerLink="/business-banking-services" routerLinkActive="active" mat-raised-button color="primary" class="bck-btn">Back</button>
+      <button mat-raised-button color="primary" routerLink="/upload-nric" class="nxt-btn">Next</button>
+    </span>
+  </div>
+</div>
+<app-upload-nric *ngIf="forUploadingNRIC"></app-upload-nric>

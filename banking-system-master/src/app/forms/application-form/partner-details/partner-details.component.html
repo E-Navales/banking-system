@@ -1,0 +1,156 @@
+<div *ngIf="!forBusinessApplication">
+  <mat-card>
+    <div class="form-container">
+      <mat-card-content>
+        <h3><b>Please enter Director/Partner/Sole-Proprietor details</b></h3>
+        <form [formGroup]="partnerForm">
+          <div class="row">
+            <mat-form-field class="form-width-30">
+              <mat-label>Name</mat-label>
+              <input matInput formControlName="name">
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field class="form-width-30">
+              <mat-label>NRIC Number</mat-label>
+              <input matInput type="number" formControlName="nricNo">
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field class="form-width-30">
+              <mat-label>Email address</mat-label>
+              <input matInput formControlName="email">
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field class="form-width-30">
+              <mat-label>Mobile number</mat-label>
+              <input matInput maxlength="10" placeholder="+60" formControlName="mobile">
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-checkbox [checked]="checked"><b>Ultimate owner and decision maker of the company/business</b></mat-checkbox>
+          </div>
+          <div class="row">
+            <mat-form-field class="form-width-50">
+              <mat-label>Residential address</mat-label>
+              <textarea matInput placeholder="Ex. 123 Test St." formControlName="residentialAddress"></textarea>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field>
+              <mat-label>Postal Code</mat-label>
+              <input matInput type="number" maxlength="5" placeholder="Ex. 94105" formControlName="postalCode">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>State</mat-label>
+              <mat-select>
+                <mat-option value="option">Selangor</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Country</mat-label>
+              <mat-select (selectionChange)="checkValue($event.value)" formControlName="country">
+                <mat-option value="Malaysia">Malaysia</mat-option>
+                <mat-option value="Singapore">Singapore</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-list>
+              <mat-list-item>
+                <a (click)="toggle()"><mat-icon>add_circle_outline</mat-icon></a>Add additional director/partner
+              </mat-list-item>
+            </mat-list>
+          </div>
+          <!-- hidden div start -->
+          <div *ngIf="show2ndDirector">
+            <h3><b>2nd director/partner:</b></h3>
+            <div class="row">
+              <mat-form-field class="form-width">
+                <mat-label>Name</mat-label>
+                <input matInput>
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <mat-form-field class="form-width">
+                <mat-label>Email address</mat-label>
+                <input matInput>
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <mat-form-field class="form-width">
+                <mat-label>Mobile number</mat-label>
+                <input matInput maxlength="10" placeholder="+60">
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <mat-checkbox><b>Ultimate owner and decision maker of the company/business</b></mat-checkbox>
+            </div>
+          </div>
+          <!-- hidden div end -->
+          <div class="row">
+            <p>
+              <mat-label>
+                <b>Does the company have other/additional ultimate owner(s) and decision maker(s) other than the above director(s)/partners/sole-proprietor?</b>
+              </mat-label>
+            </p>
+            <p>
+              <mat-radio-group aria-label="Select an option" formControlName="hasOtherUltimateOwner">
+                <mat-radio-button value="1">Yes</mat-radio-button>
+                <mat-radio-button value="2">No</mat-radio-button>
+              </mat-radio-group>
+            </p>
+          </div>
+          <br>
+          <mat-divider></mat-divider>
+          <br>
+          <div class="row">
+            <p><b>This application will be saved and retrievable from the email of</b></p>
+          </div>
+          <div class="row">
+            <mat-form-field class="form-width-30">
+              <mat-label>Individual Names</mat-label>
+              <mat-select (selectionChange)="checkName($event.value)"  formControlName="applicationEmail">
+                <mat-option value="option">Name 1</mat-option>
+                <mat-option value="option">Name 2</mat-option>
+                <mat-option value="None">None of the above</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div *ngIf="!hideBankInfo" class="row">
+            <p><b>Email address:</b> abc@company.com</p>
+          </div>
+          <!-- hidden div start -->
+          <div *ngIf="hideBankInfo">
+            <div class="row">
+              <p><b>Reference code(for bank use only)</b></p>
+              <mat-form-field class="form-width">
+                <mat-label>code</mat-label>
+                <input matInput>
+              </mat-form-field>
+              <p><b>Email Address(for bank use only)</b></p>
+              <mat-form-field class="form-width">
+                <mat-label>Email</mat-label>
+                <input matInput>
+              </mat-form-field>
+              <p><b>Mobile Number(for bank use only)</b></p>
+              <mat-form-field class="form-width">
+                <mat-label>+60</mat-label>
+                <input matInput>
+              </mat-form-field>
+            </div>
+          </div>
+          <!-- hidden div end -->
+        </form>
+      </mat-card-content>
+    </div>
+  </mat-card>
+  <div class="form-btn-wrapper">
+    <span>
+      <button routerLink="/company-details" routerLinkActive="active" mat-raised-button color="primary" class="bck-btn">Back</button>
+      <button mat-raised-button color="primary" routerLink="/about-business" class="nxt-btn" [disabled]="!partnerForm.valid">Next</button>
+    </span>
+  </div>
+</div>
+<app-about-business *ngIf="forBusinessApplication"></app-about-business>

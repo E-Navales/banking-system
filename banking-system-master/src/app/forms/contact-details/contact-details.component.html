@@ -1,0 +1,45 @@
+<div *ngIf="!isContactSubmitted">
+  <mat-card>
+    <div>
+      <mat-card-title></mat-card-title>
+    </div>
+    <div>
+      <mat-card-content>
+        <h3><b>Please tell us your contact details</b></h3>
+        <div class="row">
+          <mat-form-field class="contact-form-width">
+            <mat-label>Your company name</mat-label>
+            <input matInput>
+            <mat-icon matSuffix>business_center</mat-icon>
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <mat-form-field class="contact-form-width">
+            <mat-label>Your name</mat-label>
+            <input matInput>
+            <mat-icon matSuffix>person</mat-icon>
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <mat-form-field class="contact-form-width">
+            <mat-label>Your mobile number</mat-label>
+            <input matInput maxlength="10" placeholder="+60">
+            <mat-icon matSuffix>phone</mat-icon>
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <mat-form-field class="contact-form-width">
+            <mat-label>Your email</mat-label>
+            <input matInput>
+            <mat-icon matSuffix>email</mat-icon>
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+    </div>
+  </mat-card>
+  <div class="form-btn-wrapper">
+    <button routerLink="/main" routerLinkActive="active" mat-raised-button color="primary" class="bck-btn"><mat-icon>arrow_back</mat-icon></button>
+    <button mat-raised-button color="primary" routerLink="/message" class="nxt-btn">Next</button>
+  </div>
+</div>
+<!-- <app-message *ngIf="isContactSubmitted"></app-message> -->

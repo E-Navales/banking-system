@@ -1,0 +1,122 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.container {
+  width: 100%;
+  padding: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  background: whitesmoke;
+}
+
+@media (min-width: 576px) {
+  .container {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+}
+
+.container-fluid, .container-sm, .container-md, .container-lg, .container-xl {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 576px) {
+  .container, .container-sm {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container, .container-sm, .container-md {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container, .container-sm, .container-md, .container-lg {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container, .container-sm, .container-md, .container-lg, .container-xl {
+    max-width: 1140px;
+  }
+}
+
+.img-fluid {
+  max-width: 15rem;
+  height: auto;
+}
+
+.mat-toolbar {
+  background: white;
+}
+
+
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
+
+.button-wrapper {
+  text-align: right;
+  padding: .5rem;
+}
+.bck-btn {
+  float: left;
+  position: absolute
+}
+.nxt-btn{
+  float: right;
+  position: absolute
+}
+.form-btn-wrapper {
+  position: static;
+  margin-bottom: 2rem;
+  padding: .5rem;
+}
+.form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+.form-width {
+  width: 100%;
+}
+.form-width-30 {
+  width: 30%;
+}
+.form-width-50 {
+  width: 50%;
+}
+.contact-form-width {
+  width: 50%;
+}
+.chckbox {
+  margin-right: 1rem
+}
+
+.mat-checkbox-layout { white-space: normal !important; }

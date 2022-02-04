@@ -1,0 +1,53 @@
+<div *ngIf="!forAuthentication">
+  <mat-card>
+    <div>
+      <mat-card-title></mat-card-title>
+    </div>
+    <div>
+      <mat-card-content>
+        <h3><b>Please tell us your who you are</b></h3>
+        <form [formGroup]="clientForm">
+          <div class="row">
+            <mat-form-field class="contact-form-width">
+              <mat-label>Your name</mat-label>
+              <input matInput formControlName="name">
+              <mat-icon matSuffix>person</mat-icon>
+              <mat-error *ngIf="clientForm.get('name').hasError('required')">
+                Name is <b>required</b>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field class="contact-form-width">
+              <mat-label>Your mobile number</mat-label>
+              <input matInput maxlength="10" placeholder="+60" formControlName="mobile">
+              <mat-icon matSuffix>phone</mat-icon>
+              <mat-error *ngIf="clientForm.get('name').hasError('required')">
+                Mobile number is <b>required</b>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field class="contact-form-width">
+              <mat-label>Your email</mat-label>
+              <input matInput formControlName="email">
+              <mat-icon matSuffix>email</mat-icon>
+              <mat-error *ngIf="clientForm.get('email').hasError('email') && !clientForm.get('email').hasError('required')">
+                Please enter a valid email address
+              </mat-error>
+              <mat-error *ngIf="clientForm.get('email').hasError('required')">
+                Email is <b>required</b>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <p>Please ensure that the contact details belongs to the person selected above. We will use these contact details to save and retrieve your application</p>
+        </form>
+      </mat-card-content>
+    </div>
+  </mat-card>
+  <div class="form-btn-wrapper">
+      <button routerLink="/main" routerLinkActive="active" mat-raised-button color="primary" class="bck-btn"><mat-icon>arrow_back</mat-icon></button>
+      <button mat-raised-button color="primary" routerLink="/otp-authentication" class="nxt-btn" [disabled]="!clientForm.valid">Next</button>
+  </div>
+</div>
+<app-otp-authentication *ngIf="forAuthentication"></app-otp-authentication>

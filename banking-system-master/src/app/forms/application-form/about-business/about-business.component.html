@@ -1,0 +1,56 @@
+<div *ngIf="!forTransactions">
+  <mat-card>
+    <div>
+      <mat-card-title>About your business</mat-card-title>
+    </div>
+    <div>
+      <mat-card-content>
+        <form [formGroup]="aboutBusinessForm">
+          <div class="row">
+            <mat-form-field class="form-width-30">
+              <mat-label>Your business mainly operates in</mat-label>
+              <mat-select formControlName="businessOperatesIn">
+                <mat-option value="option">Malaysia</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field class="form-width-50">
+              <mat-label>Please tell us more about your business:</mat-label>
+              <textarea matInput formControlName="aboutBusiness"></textarea>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field class="form-width-50">
+              <mat-label><b>How many businesses do you have?</b></mat-label>
+              <input matInput type="number" formControlName="businessCount">
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-label>
+              <b>Does your business involve in any of the following activities</b>
+            </mat-label>
+            <ul>
+              <li>Armament or weapons related industries</li>
+              <li>Casinos, junkets, betting  or other gambling related businesses</li>
+              <li>Money services businesses</li>
+              <li>Virtual currencies</li>
+              <li>Forex trader, multi-level marketing/pyramid scheme, investment advisor/business</li>
+            </ul>
+            <mat-radio-group aria-label="Select an option" formControlName="businessActivities">
+              <mat-radio-button value="1">No, none of the above</mat-radio-button>
+              <mat-radio-button value="2">Yes, some of the above</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </form>
+      </mat-card-content>
+    </div>
+  </mat-card>
+  <div class="form-btn-wrapper">
+    <span>
+      <button routerLink="/partner-details" routerLinkActive="active" mat-raised-button color="primary" class="bck-btn">Back</button>
+      <button mat-raised-button color="primary" routerLink="/about-transactions" class="nxt-btn" [disabled]="!aboutBusinessForm.valid">Next</button>
+    </span>
+  </div>
+</div>
+<app-about-transactions *ngIf="forTransactions"></app-about-transactions>
